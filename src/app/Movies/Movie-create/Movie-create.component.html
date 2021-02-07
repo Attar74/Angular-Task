@@ -1,0 +1,43 @@
+<div class="row mt-5 w-100 text-center">
+  <ng-template #spinner>
+    <div class="d-flex align-items-center">
+      <strong>Loading...</strong>
+      <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+    </div>
+  </ng-template>
+  <form *ngIf = "!isLoading else spinner;" class="w-50 d-inline-block m-auto" (submit)="onSaveMovie(movieForm)" #movieForm="ngForm">
+    <div class="col-12">
+      <input [ngModel] = "movie?.title"
+              name="title"
+              type="text"
+              class="form-control mb-2"
+              placeholder="Movie's Title"
+              required
+              minlength="2"
+              #title="ngModel">
+              <label class="pl-2 text-danger float-left" *ngIf = "title.invalid && title.touched">Title Looks Bad!</label>
+              <label class="pl-2 text-success float-left" *ngIf = "!title.invalid">Title Looks good!</label>
+              <input
+              [ngModel] = "movie?.rate"
+              name="rate"
+              type="text"
+              class="form-control"
+              placeholder="Movie's Rate"
+              required
+              minlength="1"
+              #rate="ngModel">
+              <label class="pl-2 text-danger float-left" *ngIf = "rate.invalid && rate.touched">Rate Looks Bad!</label>
+              <label class="pl-2 text-success float-left" *ngIf = "!rate.invalid">Rate Looks good!</label>
+        <!-- <button class="btn btn-primary" type="button" id="button-addon2">Button</button> -->
+    </div>
+    <div class="container shadow-sm p-3 mb-5 bg-white rounded">
+      <!-- <textarea class="w-75 border-top-0 border-left-0 border-right-0 " rows="3"></textarea> -->
+      <button
+        class="btn btn-primary w-100"
+        type="submit">
+        Save
+      </button>
+    </div>
+  </form>
+</div>
+

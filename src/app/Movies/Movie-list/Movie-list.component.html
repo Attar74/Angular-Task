@@ -1,0 +1,43 @@
+<ng-template #spinner>
+  <div class="d-flex align-items-center">
+    <strong>Loading...</strong>
+    <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+  </div>
+</ng-template>
+<div *ngIf="!isLoading else spinner;">
+  <div *ngIf="Movies.length > 0; else therIsNoMovies" class="mt-5">
+    <div class="container col-12 row p-0 m-0">
+      <div class="col-3 m-0 p-0 mt-5 w-100 text-center" *ngFor = "let Movie of Movies">
+        <img class="w-75 m-auto d-block" src="https://lumiere-a.akamaihd.net/v1/images/movie_poster_maleficent_197d284f.jpeg?region=0,0,300,450" alt="">
+        <p class="h3 text-center">{{Movie.title}}</p>
+        <p class="h5 text-center">{{Movie.rate}}</p>
+        <div class="d-inline-block m-auto">
+          <!-- <a class="btn btn-warning mr-2" [routerLink]="['/edit', Movie.id]">Edit</a> -->
+          <button class="btn btn-danger" (click)="onDelete(Movie.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="pt-2" *ngFor = "let Movie of Movies">
+      <p>
+        <button (click)="show(collapse)" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          Toggle
+        </button>
+      </p>
+      <div #collapse class="collapse" id="collapseExample">
+        <div class="card card-body">
+          <div>
+            {{Movie.title}} {{Movie.rate}}
+          </div>
+          <div class="">
+            <a class="btn btn-warning mr-2" [routerLink]="['/edit', Movie.id]">Edit</a>
+            <button class="btn btn-danger" (click)="onDelete(Movie.id)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+  <ng-template #therIsNoMovies>
+    <p class="bg-warning text-center mt-5 p-3 h5">There is no Movie right now, Try again later</p>
+  </ng-template>
+
+</div>
