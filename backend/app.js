@@ -3,9 +3,12 @@ const bodyParser = require('body-parser');
 const app = new express();
 const mongoose = require('mongoose');
 const moviesRoutes = require('./routes/movies');
+const path = require("path");
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use("/images", express.static(path.join("backend/images")));
 
 mongoose.connect("mongodb+srv://Mo:frcFZv64aB4xkOv7@cluster0.h7le4.mongodb.net/movieDB?retryWrites=true&w=majority")
         .then(()=>{

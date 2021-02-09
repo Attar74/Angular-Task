@@ -8,11 +8,11 @@
   <div *ngIf="Movies.length > 0; else therIsNoMovies" class="mt-5">
     <div class="container col-12 row p-0 m-0">
       <div class="col-3 m-0 p-0 mt-5 w-100 text-center" *ngFor = "let Movie of Movies">
-        <img class="w-75 m-auto d-block" src="https://lumiere-a.akamaihd.net/v1/images/movie_poster_maleficent_197d284f.jpeg?region=0,0,300,450" alt="">
-        <p class="h3 text-center">{{Movie.title}}</p>
+        <img class="w-75 m-auto d-block" [src]="Movie.imagePath" [alt]="Movie.title">
+        <p class="h3 text-center mt-2">{{Movie.title}}</p>
         <p class="h5 text-center">{{Movie.rate}}</p>
         <div class="d-inline-block m-auto">
-          <!-- <a class="btn btn-warning mr-2" [routerLink]="['/edit', Movie.id]">Edit</a> -->
+          <a class="btn btn-warning mr-2" [routerLink]="['/edit', Movie.id]">Edit</a>
           <button class="btn btn-danger" (click)="onDelete(Movie.id)">Delete</button>
         </div>
       </div>

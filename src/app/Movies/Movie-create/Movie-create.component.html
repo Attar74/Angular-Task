@@ -5,35 +5,35 @@
       <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
     </div>
   </ng-template>
-  <form *ngIf = "!isLoading else spinner;" class="w-50 d-inline-block m-auto" (submit)="onSaveMovie(movieForm)" #movieForm="ngForm">
+  <form [formGroup]="form" *ngIf = "!isLoading else spinner;" class="w-50 d-inline-block m-auto" (submit)="onSaveMovie()" >
     <div class="col-12">
-      <input [ngModel] = "movie?.title"
-              name="title"
+      <input
+              formControlName="title"
               type="text"
               class="form-control mb-2"
-              placeholder="Movie's Title"
-              required
-              minlength="2"
-              #title="ngModel">
-              <label class="pl-2 text-danger float-left" *ngIf = "title.invalid && title.touched">Title Looks Bad!</label>
-              <label class="pl-2 text-success float-left" *ngIf = "!title.invalid">Title Looks good!</label>
+              placeholder="Movie's Title">
+              <label class="pl-2 text-danger float-right" *ngIf = "form.get('title').invalid && form.get('title').touched">Title Looks Bad!</label>
+              <label class="pl-2 text-success float-right" *ngIf = "!form.get('title').invalid">Title Looks good!</label>
               <input
-              [ngModel] = "movie?.rate"
-              name="rate"
+              formControlName="rate"
               type="text"
               class="form-control"
-              placeholder="Movie's Rate"
-              required
-              minlength="1"
-              #rate="ngModel">
-              <label class="pl-2 text-danger float-left" *ngIf = "rate.invalid && rate.touched">Rate Looks Bad!</label>
-              <label class="pl-2 text-success float-left" *ngIf = "!rate.invalid">Rate Looks good!</label>
+              placeholder="Movie's Rate">
+              <label class="pr-2 text-danger float-right" *ngIf = "form.get('rate').invalid && form.get('rate').touched">Rate Looks Bad!</label>
+              <label class="pr-2 text-success float-right" *ngIf = "!form.get('rate').invalid">Rate Looks good!</label>
         <!-- <button class="btn btn-primary" type="button" id="button-addon2">Button</button> -->
+        <div class="image-preview" *ngIf = "imagePreview && imagePreview !== '' && form.get('image').valid">
+          <img [src]="imagePreview" [alt]="form.value.title">
+        </div>
+        <div class="file btn btn-warning float-left mt-2 mb-2">
+          Upload Movie Image
+          <input type="file" name="file" (change)="onImagePicked($event)"/>
+        </div>
     </div>
-    <div class="container shadow-sm p-3 mb-5 bg-white rounded">
+    <div class="container shadow-sm p-3 mb-5 bg-white rounded d-flex">
       <!-- <textarea class="w-75 border-top-0 border-left-0 border-right-0 " rows="3"></textarea> -->
       <button
-        class="btn btn-primary w-100"
+        class="btn btn-primary w-50 m-auto d-inline-block"
         type="submit">
         Save
       </button>

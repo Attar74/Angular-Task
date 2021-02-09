@@ -1,3 +1,22 @@
-textarea:focus {
-  outline: none;
+input[type = file]{
+  position: absolute;
+  font-size: 50px;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+div.file {
+  position: relative;
+  overflow: hidden;
+}
+.image-preview{
+  height: 5rem;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.image-preview img{
+  height: 100%;
+  float: left;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
 }
